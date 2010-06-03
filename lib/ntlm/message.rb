@@ -133,7 +133,7 @@ module NTLM
       @buffer = string
       signature, type = string.unpack('a8V')
       raise ParseError, 'Unknown signature' if signature != SSP_SIGNATURE
-      raise ParseError, "Wrong type (expected #{self.class::TYPE}, but got #{type}" if type != self.class::TYPE
+      raise ParseError, "Wrong type (expected #{self.class::TYPE}, but got #{type})" if type != self.class::TYPE
     end
 
     def append_payload(string, allocation_size = nil)
