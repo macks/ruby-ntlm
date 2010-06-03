@@ -8,9 +8,9 @@ task :default => :test
 Jeweler::Tasks.new do |gem|
   gem.name = 'ruby-ntlm'
   gem.summary = %Q{NTLM implementation for Ruby}
-  gem.description = %Q{NTLM implementation for Ruby. It's early alpha version.}
+  gem.description = %Q{NTLM implementation for Ruby.}
   gem.email = 'macksx@gmail.com'
-  gem.homepage = 'http://github.com/macks/'
+  gem.homepage = 'http://github.com/macks/ruby-ntlm'
   gem.authors = ['MATSUYAMA Kengo']
 end
 
