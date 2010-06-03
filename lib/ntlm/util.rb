@@ -16,7 +16,7 @@ module NTLM
       end
 
       def encode_utf16(str)
-        str.to_s.encode(Encoding::UTF_16LE, Encoding::UTF_8).force_encoding(Encoding::ASCII_8BIT)
+        str.to_s.encode(Encoding::UTF_16LE).force_encoding(Encoding::ASCII_8BIT)
       end
 
     else
