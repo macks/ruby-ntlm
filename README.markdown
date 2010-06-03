@@ -29,7 +29,7 @@ Usage
     imap = Net::IMAP.new('imap.example.com')
     imap.authenticate('NTLM', 'User', 'Domain', 'Password')
 
-### SmTP ###
+### SMTP ###
 
     require 'ntlm/smtp'
     smtp = Net::SMTP.new('smtp.example.com')
