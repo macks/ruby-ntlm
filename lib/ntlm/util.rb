@@ -1,7 +1,6 @@
 # vim: set et sw=2 sts=2:
 
 require 'openssl'
-require 'iconv'
 
 module NTLM
   module Util
@@ -10,12 +9,28 @@ module NTLM
 
     module_function
 
-    def decode_utf16(str)
-      Iconv.conv('UTF-8', 'UTF-16LE', str)
-    end
+    if RUBY_VERSION >= '1.9'
 
-    def encode_utf16(str)
-      Iconv.conv('UTF-16LE', 'UTF-8', str)
+      def decode_utf16(str)
+        str.encode(Encoding::UTF_8, Encoding::UTF_16LE)
+      end
+
+      def encode_utf16(str)
+        str.to_s.encode(Encoding::UTF_16LE, Encoding::UTF_8).force_encoding(Encoding::ASCII_8BIT)
+      end
+
+    else
+
+      require 'iconv'
+
+      def decode_utf16(str)
+        Iconv.conv('UTF-8', 'UTF-16LE', str)
+      end
+
+      def encode_utf16(str)
+        Iconv.conv('UTF-16LE', 'UTF-8', str)
+      end
+
     end
 
     def create_des_keys(string)
