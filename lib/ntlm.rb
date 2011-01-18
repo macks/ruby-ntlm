@@ -18,7 +18,7 @@ module NTLM
   def self.authenticate(challenge_message, user, domain, password, options = {})
     challenge = Message::Challenge.parse(challenge_message)
 
-    opt = options.dup.update({
+    opt = options.merge({
       :ntlm_v2_session => challenge.has_flag?(:NEGOTIATE_EXTENDED_SECURITY),
     })
     nt_response, lm_response = Util.ntlm_v1_response(challenge.challenge, password, opt)

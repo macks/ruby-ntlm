@@ -59,7 +59,7 @@ module NTLM
       :AV_TARGET_NAME       => 9,
       :AV_CHANNEL_BINDINGS  => 10,
     }
-    AV_PAIR_NAMES = AV_PAIRS.inject({}) {|hash, (key, val)| hash[val] = key; hash}
+    AV_PAIR_NAMES = AV_PAIRS.invert
 
     FLAGS.each do |name, val|
       const_set(name, val)
