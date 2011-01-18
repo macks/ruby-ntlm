@@ -123,7 +123,7 @@ module NTLM
     end
 
     def inspect
-      variables = (instance_variables - %w(@offset @buffer @flag)).sort.map {|name| "#{name}=#{instance_variable_get(name).inspect}, " }.join
+      variables = (instance_variables.map(&:to_sym) - [:@offset, :@buffer, :@flag]).sort.map {|name| "#{name}=#{instance_variable_get(name).inspect}, " }.join
       "\#<#{self.class.name} #{variables}@flag=#{inspect_flags}>"
     end
 
