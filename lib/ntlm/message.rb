@@ -79,9 +79,15 @@ module NTLM
     end
 
     def initialize(args = {})
-      @buffer = ''
-      @offset  = 0
-      @flag    = args[:flag] || self.class::DEFAULT_FLAGS
+      @buffer      = ''
+      @offset      = 0
+      @flag        = args[:flag] || self.class::DEFAULT_FLAGS
+      @domain      = nil
+      @workstation = nil
+      @version     = nil
+      @target_info = nil
+      @session_key = nil
+      @mic         = nil
 
       self.class::ATTRIBUTES.each do |key|
         instance_variable_set("@#{key}", args[key]) if args[key]
@@ -147,7 +153,7 @@ module NTLM
     end
 
     def fetch_payload(fields)
-      size, allocated_size, offset = fields.unpack('vvV')
+      size, _, offset = fields.unpack('vvV')
       return nil if size.zero?
       @buffer[offset, size]
     end
@@ -204,7 +210,7 @@ module NTLM
       ATTRIBUTES    = [:domain, :workstation, :version]
       DEFAULT_FLAGS = [NEGOTIATE_UNICODE, NEGOTIATE_OEM, REQUEST_TARGET, NEGOTIATE_NTLM, NEGOTIATE_ALWAYS_SIGN, NEGOTIATE_EXTENDED_SECURITY].inject(:|)
 
-      attr_accessor *ATTRIBUTES
+      attr_accessor(*ATTRIBUTES)
 
       def parse(string)
         super
@@ -247,7 +253,7 @@ module NTLM
       ATTRIBUTES    = [:target_name, :challenge, :target_info, :version]
       DEFAULT_FLAGS = 0
 
-      attr_accessor *ATTRIBUTES
+      attr_accessor(*ATTRIBUTES)
 
       def parse(string)
         super
@@ -300,7 +306,7 @@ module NTLM
       ATTRIBUTES    = [:lm_response, :nt_response, :domain, :user, :workstation, :session_key, :version, :mic]
       DEFAULT_FLAGS = [NEGOTIATE_UNICODE, REQUEST_TARGET, NEGOTIATE_NTLM, NEGOTIATE_ALWAYS_SIGN, NEGOTIATE_EXTENDED_SECURITY].inject(:|)
 
-      attr_accessor *ATTRIBUTES
+      attr_accessor(*ATTRIBUTES)
 
       def parse(string)
         super
