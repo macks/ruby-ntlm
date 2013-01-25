@@ -147,7 +147,7 @@ module NTLM
     end
 
     def fetch_payload(fields)
-      size, allocated_size, offset = fields.unpack('vvV')
+      size, _, offset = fields.unpack('vvV')
       return nil if size.zero?
       @buffer[offset, size]
     end
