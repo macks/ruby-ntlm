@@ -79,9 +79,15 @@ module NTLM
     end
 
     def initialize(args = {})
-      @buffer = ''
-      @offset  = 0
-      @flag    = args[:flag] || self.class::DEFAULT_FLAGS
+      @buffer      = ''
+      @offset      = 0
+      @flag        = args[:flag] || self.class::DEFAULT_FLAGS
+      @domain      = nil
+      @workstation = nil
+      @version     = nil
+      @target_info = nil
+      @session_key = nil
+      @mic         = nil
 
       self.class::ATTRIBUTES.each do |key|
         instance_variable_set("@#{key}", args[key]) if args[key]
