@@ -204,7 +204,7 @@ module NTLM
       ATTRIBUTES    = [:domain, :workstation, :version]
       DEFAULT_FLAGS = [NEGOTIATE_UNICODE, NEGOTIATE_OEM, REQUEST_TARGET, NEGOTIATE_NTLM, NEGOTIATE_ALWAYS_SIGN, NEGOTIATE_EXTENDED_SECURITY].inject(:|)
 
-      attr_accessor *ATTRIBUTES
+      attr_accessor(*ATTRIBUTES)
 
       def parse(string)
         super
@@ -247,7 +247,7 @@ module NTLM
       ATTRIBUTES    = [:target_name, :challenge, :target_info, :version]
       DEFAULT_FLAGS = 0
 
-      attr_accessor *ATTRIBUTES
+      attr_accessor(*ATTRIBUTES)
 
       def parse(string)
         super
@@ -300,7 +300,7 @@ module NTLM
       ATTRIBUTES    = [:lm_response, :nt_response, :domain, :user, :workstation, :session_key, :version, :mic]
       DEFAULT_FLAGS = [NEGOTIATE_UNICODE, REQUEST_TARGET, NEGOTIATE_NTLM, NEGOTIATE_ALWAYS_SIGN, NEGOTIATE_EXTENDED_SECURITY].inject(:|)
 
-      attr_accessor *ATTRIBUTES
+      attr_accessor(*ATTRIBUTES)
 
       def parse(string)
         super
