@@ -17,10 +17,10 @@ module Net
       end
 
       res = critical {
-        r = get_response("AUTH NTLM #{NTLM.negotiate.to_base64}")
+        r = get_response("AUTH NTLM #{::NTLM.negotiate.to_base64}")
         check_auth_continue(r)
         challenge = r.string.split(/ /, 2).last.unpack('m').first
-        get_response(NTLM.authenticate(challenge, user, domain, secret).to_base64)
+        get_response(::NTLM.authenticate(challenge, user, domain, secret).to_base64)
       }
       check_auth_response(res)
       res
