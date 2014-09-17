@@ -25,13 +25,6 @@ Usage
     request.ntlm_auth('User', 'Domain', 'Password')
     response = http.request(request)
 
-### HTTP (using Mechanize) ###
-
-    require 'ntlm/mechanize'
-    mech = Mechanize.new
-    mech.auth('Domain\\User', 'Password')
-    mech.get('http://www.example.com/index.html')
-
 ### IMAP ###
 
     require 'ntlm/imap'
