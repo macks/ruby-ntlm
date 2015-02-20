@@ -23,6 +23,8 @@ module Net
       end
 
       unless started?
+        @original_body = req.body
+        req.body = nil
         start do
           req.delete('connection')
           return request(req, body, &block)
@@ -39,6 +41,7 @@ module Net
         user, domain, password = req.ntlm_auth_params
         req['authorization'] = 'NTLM ' + NTLM.authenticate(challenge, user, domain, password).to_base64
         req.body_stream.rewind if req.body_stream
+        req.body = @original_body
         request_without_ntlm_auth(req, body, &block)  # We must re-use the connection.
       else
         yield res if block_given?
