@@ -24,9 +24,9 @@ module Net
       def process(data)
         case (@state += 1)
         when 1
-          NTLM.negotiate.to_s
+          ::NTLM.negotiate.to_s
         when 2
-          NTLM.authenticate(data, @user, @domain, @password).to_s
+          ::NTLM.authenticate(data, @user, @domain, @password).to_s
         end
       end
     end # NTLMAuthenticator
