@@ -77,7 +77,9 @@ module NTLM
     # [MS-NLMP] 3.3.1
     def ntlm_v1_response(challenge, password, options = {})
       if options[:ntlm_v2_session]
+        challenge = challenge.b if challenge.respond_to?(:b)
         client_challenge = options[:client_challenge] || OpenSSL::Random.random_bytes(8)
+        client_challenge = client_challenge.b if client_challenge.respond_to?(:b)
         hash = OpenSSL::Digest::MD5.digest(challenge + client_challenge)[0, 8]
         nt_response = encrypt(hash, nt_v1_hash(password), 21)
         lm_response = client_challenge + ("\0" * 16)
