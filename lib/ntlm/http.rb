@@ -30,14 +30,14 @@ module Net
       end
 
       # Negotiation
-      req['authorization'] = 'NTLM ' + NTLM.negotiate.to_base64
+      req['authorization'] = 'NTLM ' + ::NTLM.negotiate.to_base64
       res = request_without_ntlm_auth(req, body)
       challenge = res['www-authenticate'][/NTLM (.*)/, 1].unpack('m').first rescue nil
 
       if challenge && res.code == '401'
         # Authentication
         user, domain, password = req.ntlm_auth_params
-        req['authorization'] = 'NTLM ' + NTLM.authenticate(challenge, user, domain, password).to_base64
+        req['authorization'] = 'NTLM ' + ::NTLM.authenticate(challenge, user, domain, password).to_base64
         req.body_stream.rewind if req.body_stream
         request_without_ntlm_auth(req, body, &block)  # We must re-use the connection.
       else
