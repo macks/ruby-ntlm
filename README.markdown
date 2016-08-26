@@ -62,4 +62,4 @@ References
  * [MS-NLMP][]: NT LAN Manager (NTLM) Authentication Protocol Specification
    [MS-NLMP]: http://msdn.microsoft.com/en-us/library/cc236621%28PROT.13%29.aspx
  * [Ruby/NTLM][]: Another NTLM implementation for Ruby
-   [Ruby/NTLM]: http://rubyforge.org/projects/rubyntlm/
+   [Ruby/NTLM]: https://rubygems.org/gems/rubyntlm
