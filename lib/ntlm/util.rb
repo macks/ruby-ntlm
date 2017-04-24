@@ -58,7 +58,10 @@ module NTLM
       keys.each do |k|
         cipher.encrypt
         cipher.key = k
-        result << cipher.update(plain_text)
+
+        encrypted_text = cipher.update(plain_text)
+        encrypted_text << cipher.final
+        result << encrypted_text[0...8]
       end
 
       result
